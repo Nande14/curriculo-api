@@ -1,16 +1,12 @@
 const express = require('express');
 const router = express.Router();
 
-const tasksController = require('./controllers/tasksController');
-const tasksMiddleware = require('./middlewares/tasksMiddleware');
+const curriculoController = require('./controllers/curriculoController');
+const curriculoMiddleware = require('./middlewares/curriculoMiddleware');
 
-router.get('/tasks', tasksController.getAll);
-router.post('/tasks', tasksMiddleware.validateFieldTitle, tasksController.createTasks);
-router.delete('/tasks/:id', tasksController.deleteTasks);
-router.put('/tasks/:id',
-tasksMiddleware.validateFieldTitle,
- tasksMiddleware.validateFieldStatus,
-  tasksController.updateTasks,
-  );
+router.get('/curriculos', curriculoController.getAll);
+router.post('/curriculos', curriculoMiddleware.validateFieldNome, curriculoMiddleware.validateFieldDescricao, curriculoMiddleware.validateFieldHabilidades, curriculoController.createCurriculo);
+router.delete('/curriculos/:id', curriculoController.deleteCurriculo);
+router.put('/curriculos/:id',curriculoMiddleware.validateFieldNome, curriculoMiddleware.validateFieldDescricao, curriculoMiddleware.validateFieldHabilidades, curriculoController.updateCurriculo);
 
 module.exports = router;
